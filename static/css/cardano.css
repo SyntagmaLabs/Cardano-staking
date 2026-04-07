@@ -1,0 +1,782 @@
+/* ── cardano.css ──────────────────────────────────────────────────────────────
+   Cardano staking dashboard — dark DeFi aesthetic with Cardano-blue accents.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* ── Page layout ─────────────────────────────────────────────────────────── */
+.ada-page {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 28px 32px 60px;
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+.ada-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.ada-page-title {
+  font-family: var(--display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ada-logo-mark {
+  font-size: 1.8rem;
+  color: #0033ad;
+  text-shadow: 0 0 18px rgba(0, 51, 173, 0.5);
+  font-family: var(--display);
+}
+
+.ada-page-sub {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 4px;
+  font-family: var(--display);
+}
+
+.ada-refresh-btn {
+  font-family: var(--display);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  padding: 8px 18px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(0, 80, 210, 0.4);
+  background: rgba(0, 51, 173, 0.1);
+  color: #6699ff;
+  cursor: pointer;
+  transition: all 0.18s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.ada-refresh-btn:hover {
+  border-color: #4477ee;
+  background: rgba(0, 51, 173, 0.2);
+  box-shadow: 0 0 12px rgba(0, 51, 173, 0.3);
+}
+
+.ada-refresh-btn.spinning .ada-refresh-icon {
+  animation: ada-spin 0.8s linear infinite;
+}
+
+@keyframes ada-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Stat strip ──────────────────────────────────────────────────────────── */
+.ada-stat-strip {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.ada-stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+
+.ada-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
+
+.ada-stat-teal::before   { background: var(--teal); }
+.ada-stat-blue::before   { background: #4488ff; }
+.ada-stat-purple::before { background: #8866ff; }
+.ada-stat-gold::before   { background: #e2a93b; }
+.ada-stat-muted::before  { background: var(--border3); }
+
+.ada-stat-label {
+  font-family: var(--display);
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ada-stat-value {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.1;
+}
+
+.ada-stat-teal   .ada-stat-value { color: var(--teal); }
+.ada-stat-blue   .ada-stat-value { color: #6699ff; }
+.ada-stat-purple .ada-stat-value { color: #aa88ff; }
+.ada-stat-gold   .ada-stat-value { color: #e2a93b; }
+
+.ada-stat-sub {
+  font-family: var(--display);
+  font-size: 0.68rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ── Main grid ───────────────────────────────────────────────────────────── */
+.ada-main-grid {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* ── Panel base ──────────────────────────────────────────────────────────── */
+.ada-panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+}
+
+.ada-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #0033ad 0%, #4488ff 60%, transparent 100%);
+  opacity: 0.6;
+}
+
+.ada-panel-head {
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ada-panel-title {
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text);
+}
+
+.ada-panel-sub {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ── Entity list ─────────────────────────────────────────────────────────── */
+.ada-entity-list {
+  padding: 8px 0;
+}
+
+.ada-entity-item {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.14s;
+  position: relative;
+}
+
+.ada-entity-item:last-child { border-bottom: none; }
+
+.ada-entity-item:hover  { background: rgba(0, 51, 173, 0.05); }
+.ada-entity-item.active { background: rgba(0, 51, 173, 0.08); }
+
+.ada-entity-item.active::after {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: #4488ff;
+  border-radius: 0 2px 2px 0;
+}
+
+.ada-entity-name {
+  font-family: var(--display);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.ada-entity-meta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.ada-entity-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ada-entity-stat-label {
+  font-family: var(--display);
+  font-size: 0.62rem;
+  color: var(--muted);
+}
+
+.ada-entity-stat-val {
+  font-family: var(--display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text2);
+}
+
+.ada-entity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--display);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  padding: 2px 7px;
+  border-radius: 3px;
+  font-weight: 700;
+  float: right;
+  margin-left: 8px;
+}
+
+.ada-badge-active {
+  background: rgba(0, 212, 170, 0.1);
+  color: var(--teal);
+  border: 1px solid rgba(0, 212, 170, 0.25);
+}
+
+.ada-badge-inactive {
+  background: rgba(90, 122, 168, 0.1);
+  color: var(--muted);
+  border: 1px solid rgba(90, 122, 168, 0.2);
+}
+
+.ada-entity-staking-bar {
+  height: 3px;
+  border-radius: 2px;
+  background: var(--border2);
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.ada-entity-staking-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #4488ff, #00d4aa);
+  transition: width 0.6s ease;
+}
+
+/* ── Right column ────────────────────────────────────────────────────────── */
+.ada-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0; /* prevent grid blowout */
+}
+
+/* ── Pool list ───────────────────────────────────────────────────────────── */
+.ada-pool-list {
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ada-pool-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto 80px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  background: var(--card2);
+  border: 1px solid var(--border);
+  transition: border-color 0.15s;
+}
+
+.ada-pool-row:hover { border-color: var(--border3); }
+
+.ada-pool-name {
+  font-family: var(--display);
+  font-size: 0.8rem;
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ada-pool-id-short {
+  font-family: var(--display);
+  font-size: 0.62rem;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.ada-pool-wallets {
+  font-family: var(--display);
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.ada-pool-stake {
+  font-family: var(--display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6699ff;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.ada-pool-bar-bg {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border2);
+  overflow: hidden;
+}
+
+.ada-pool-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #0033ad, #4488ff);
+  transition: width 0.6s ease;
+}
+
+/* ── Wallet panel header — title row + filter row stacked ────────────────── */
+.ada-panel-head-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.ada-wallet-filter {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.ada-select {
+  font-family: var(--display);
+  font-size: 0.75rem;
+  padding: 6px 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border2);
+  background: var(--card2);
+  color: var(--text);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.ada-select:hover { border-color: var(--border3); }
+.ada-select:focus { border-color: #4488ff; }
+
+.ada-search {
+  font-family: var(--display);
+  font-size: 0.75rem;
+  padding: 6px 10px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border2);
+  background: var(--card2);
+  color: var(--text);
+  outline: none;
+  width: 220px;
+  transition: border-color 0.15s;
+}
+
+.ada-search::placeholder { color: var(--dim); }
+.ada-search:focus { border-color: #4488ff; }
+
+/* ── Table ───────────────────────────────────────────────────────────────── */
+.ada-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: 480px;
+  overflow-y: auto;
+}
+
+.ada-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--display);
+  font-size: 0.76rem;
+}
+
+.ada-table th {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  background: var(--card2);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+.ada-th-num { text-align: right; }
+
+.ada-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text2);
+  vertical-align: middle;
+}
+
+.ada-table tr:last-child td { border-bottom: none; }
+.ada-table tr:hover td { background: rgba(255,255,255,0.015); }
+
+.ada-td-num { text-align: right; color: var(--text); font-weight: 600; }
+
+.ada-td-addr {
+  font-size: 0.68rem;
+  color: var(--muted);
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ada-td-addr a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.ada-td-addr a:hover { color: #6699ff; }
+
+.ada-status-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.ada-status-staking  { background: var(--teal); box-shadow: 0 0 5px var(--teal); }
+.ada-status-inactive { background: var(--muted); }
+
+.ada-pool-tag {
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: rgba(68, 136, 255, 0.1);
+  color: #6699ff;
+  border: 1px solid rgba(68, 136, 255, 0.2);
+  display: inline-block;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.ada-entity-tag {
+  font-size: 0.65rem;
+  color: var(--text2);
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ada-table-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+  font-family: var(--display);
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+/* ── Loading / utility ───────────────────────────────────────────────────── */
+.ada-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  padding: 20px;
+  font-family: var(--display);
+}
+
+.ada-loading-cell {
+  text-align: center;
+  padding: 24px !important;
+  color: var(--muted) !important;
+}
+
+.ada-spinner {
+  width: 12px; height: 12px;
+  border: 2px solid var(--border2);
+  border-top-color: #4488ff;
+  border-radius: 50%;
+  animation: ada-spin 0.65s linear infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.ada-no-data {
+  text-align: center;
+  padding: 32px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-family: var(--display);
+}
+
+.ada-error {
+  color: var(--red);
+  font-family: var(--display);
+  font-size: 0.78rem;
+  padding: 16px 20px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Tablet: collapse 2-col grid, stat strip → 3 cols ────────────────────── */
+@media (max-width: 1100px) {
+  .ada-main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ada-stat-strip {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .ada-panel-head {
+    padding: 16px 18px 12px;
+  }
+}
+
+/* ── Mobile landscape / large phone ≤ 768px ─────────────────────────────── */
+@media (max-width: 768px) {
+  .ada-page {
+    padding: 14px 16px 40px;
+  }
+
+  /* Header — stack title above full-width refresh button */
+  .ada-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .ada-header-left,
+  .ada-header-right {
+    width: 100%;
+  }
+
+  .ada-page-title {
+    font-size: 1.25rem;
+  }
+
+  .ada-logo-mark {
+    font-size: 1.4rem;
+  }
+
+  .ada-page-sub {
+    font-size: 0.73rem;
+  }
+
+  .ada-refresh-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 16px;
+  }
+
+  /* Stat strip — 2 columns */
+  .ada-stat-strip {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .ada-stat-card {
+    padding: 13px 14px;
+  }
+
+  .ada-stat-value {
+    font-size: 1.15rem;
+  }
+
+  .ada-stat-label {
+    font-size: 0.65rem;
+  }
+
+  /* Entity items */
+  .ada-entity-item {
+    padding: 12px 14px;
+  }
+
+  .ada-entity-badge {
+    float: none;
+    display: inline-flex;
+    margin-bottom: 6px;
+    margin-left: 0;
+  }
+
+  .ada-entity-name {
+    font-size: 0.85rem;
+    clear: both; /* clear the floated badge if float still applies */
+  }
+
+  .ada-entity-meta {
+    gap: 8px 14px;
+  }
+
+  /* Pool rows — 2-col: info | bar */
+  .ada-pool-list {
+    padding: 10px 14px;
+  }
+
+  .ada-pool-row {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 6px 12px;
+    padding: 10px;
+  }
+
+  /* Info (name+id) spans full width on first row */
+  .ada-pool-row > div:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .ada-pool-wallets { text-align: left; }
+  .ada-pool-stake   { text-align: right; }
+
+  .ada-pool-bar-bg {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  /* Wallet filter — full width, stacked */
+  .ada-wallet-filter {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .ada-select,
+  .ada-search {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Table — allow horizontal scroll, remove height cap */
+  .ada-table-wrap {
+    max-height: none;
+  }
+
+  .ada-table {
+    min-width: 640px;
+  }
+
+  .ada-table-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 10px 14px;
+  }
+
+  .ada-right-col {
+    gap: 16px;
+  }
+}
+
+/* ── Small phone ≤ 480px ─────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .ada-page {
+    padding: 10px 12px 32px;
+  }
+
+  .ada-page-title {
+    font-size: 1.05rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* Stat strip — single column for very small screens */
+  .ada-stat-strip {
+    grid-template-columns: repeat(2, 1fr); /* keep 2-col even at 360px */
+    gap: 8px;
+  }
+
+  .ada-stat-card {
+    padding: 11px 12px;
+  }
+
+  .ada-stat-value {
+    font-size: 1rem;
+  }
+
+  .ada-stat-label {
+    font-size: 0.6rem;
+  }
+
+  .ada-panel-head {
+    padding: 13px 13px 11px;
+  }
+
+  .ada-panel-title {
+    font-size: 0.9rem;
+  }
+
+  .ada-pool-list {
+    padding: 8px 12px;
+  }
+
+  .ada-pool-row {
+    padding: 9px 10px;
+  }
+
+  .ada-table {
+    min-width: 580px;
+    font-size: 0.72rem;
+  }
+
+  .ada-table th,
+  .ada-table td {
+    padding: 8px 10px;
+  }
+
+  .ada-td-addr  { max-width: 110px; }
+  .ada-pool-tag { max-width: 90px; }
+  .ada-entity-tag { max-width: 110px; }
+
+  .ada-table-footer {
+    font-size: 0.63rem;
+    padding: 9px 12px;
+  }
+}

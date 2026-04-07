@@ -1,0 +1,138 @@
+{% extends "app.html" %}
+{% block title %}Cardano Staking{% endblock %}
+
+{% block page_head %}
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config = { corePlugins: { preflight: false } }</script>
+<link rel="stylesheet" href="/static/css/cardano.css" />
+{% endblock %}
+
+{% block page %}
+<main class="ada-page">
+
+  <!-- ── Page header ── -->
+  <div class="ada-header">
+    <div class="ada-header-left">
+      <div class="ada-page-title">
+        <span class="ada-logo-mark">₳</span>
+        CARDANO STAKING
+      </div>
+      <div class="ada-page-sub">
+        Multi-wallet staking monitor &nbsp;·&nbsp;
+        <span id="ada-updated">—</span>
+      </div>
+    </div>
+    <div class="ada-header-right">
+      <button class="ada-refresh-btn" id="ada-refresh-btn" onclick="triggerRefresh()">
+        <span class="ada-refresh-icon">↻</span> Refresh
+      </button>
+    </div>
+  </div>
+
+  <!-- ── Top stat strip ── -->
+  <div class="ada-stat-strip" id="ada-stat-strip">
+    <div class="ada-stat-card ada-stat-teal">
+      <div class="ada-stat-label">Total Wallets</div>
+      <div class="ada-stat-value" id="s-total-wallets">—</div>
+    </div>
+    <div class="ada-stat-card ada-stat-blue">
+      <div class="ada-stat-label">Staking</div>
+      <div class="ada-stat-value" id="s-staking-count">—</div>
+      <div class="ada-stat-sub" id="s-staking-pct">—</div>
+    </div>
+    <div class="ada-stat-card ada-stat-purple">
+      <div class="ada-stat-label">Total Stake (ADA)</div>
+      <div class="ada-stat-value" id="s-total-stake">—</div>
+    </div>
+    <div class="ada-stat-card ada-stat-gold">
+      <div class="ada-stat-label">Total Rewards (ADA)</div>
+      <div class="ada-stat-value" id="s-total-rewards">—</div>
+    </div>
+    <div class="ada-stat-card ada-stat-muted">
+      <div class="ada-stat-label">Live Stake (ADA)</div>
+      <div class="ada-stat-value" id="s-live-stake">—</div>
+    </div>
+    <div class="ada-stat-card ada-stat-muted">
+      <div class="ada-stat-label">Unique Pools</div>
+      <div class="ada-stat-value" id="s-unique-pools">—</div>
+    </div>
+  </div>
+
+  <!-- ── Main grid ── -->
+  <div class="ada-main-grid">
+
+    <!-- LEFT: Entity breakdown -->
+    <div class="ada-panel">
+      <div class="ada-panel-head">
+        <div>
+          <div class="ada-panel-title">Entity Breakdown</div>
+          <div class="ada-panel-sub">Grouped by custodian / legal entity</div>
+        </div>
+      </div>
+      <div id="entity-list" class="ada-entity-list">
+        <div class="ada-loading"><span class="ada-spinner"></span> Loading…</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Pools + wallet table -->
+    <div class="ada-right-col">
+
+      <!-- Pool Distribution -->
+      <div class="ada-panel ada-panel-slim">
+        <div class="ada-panel-head">
+          <div>
+            <div class="ada-panel-title">Pool Distribution</div>
+            <div class="ada-panel-sub">Top pools by delegated stake</div>
+          </div>
+        </div>
+        <div id="pool-list" class="ada-pool-list">
+          <div class="ada-loading"><span class="ada-spinner"></span> Loading…</div>
+        </div>
+      </div>
+
+      <!-- Wallet table -->
+      <div class="ada-panel ada-panel-table">
+        <!-- Header: title on top, filter row below — stacks cleanly on mobile -->
+        <div class="ada-panel-head" style="flex-direction: column; align-items: stretch; gap: 10px;">
+          <div class="ada-panel-title">Wallet Details</div>
+          <div class="ada-wallet-filter">
+            <select id="entity-filter" class="ada-select" onchange="filterWallets()">
+              <option value="">All Entities</option>
+            </select>
+            <input id="addr-search" class="ada-search" type="text"
+                   placeholder="Search address…" oninput="filterWallets()" />
+          </div>
+        </div>
+        <div class="ada-table-wrap">
+          <table class="ada-table">
+            <thead>
+              <tr>
+                <th>Entity</th>
+                <th>Address</th>
+                <th class="ada-th-num">Balance (ADA)</th>
+                <th class="ada-th-num">Rewards (ADA)</th>
+                <th class="ada-th-num">Live Stake</th>
+                <th>Pool</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="wallet-tbody">
+              <tr><td colspan="7" class="ada-loading-cell">
+                <span class="ada-spinner"></span> Loading…
+              </td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ada-table-footer">
+          <span id="wallet-count-label">— wallets</span>
+          <span id="wallet-showing-label"></span>
+        </div>
+      </div>
+
+    </div><!-- /ada-right-col -->
+  </div><!-- /ada-main-grid -->
+
+</main>
+
+<script src="/static/js/cardano.js"></script>
+{% endblock %}

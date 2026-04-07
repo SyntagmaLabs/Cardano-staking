@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Syntagma Labs — {% block title %}DeFi Intelligence{% endblock %}</title>
+
+  <script src="https://unpkg.com/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
+  <link rel="stylesheet" href="/static/css/style.css" />
+
+  {% block page_head %}{% endblock %}
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">SYNTAGMA<span>LABS</span></div>
+  <nav class="tab-nav">
+    <a class="tab-btn {% if active_page == 'gas' %}active{% endif %}" href="/" style="text-decoration: none;">Cardano Staking</a>
+  </nav>
+  <div class="status-dot" id="status-dot" title="Live"></div>
+</header>
+
+{% block page %}{% endblock %}
+
+{% block page_scripts %}{% endblock %}
+
+</body>
+</html>
